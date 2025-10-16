@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <ThingDef ParentName="VFES_Turret_MilitaryTurret">
+    <defName>VFES_Turret_FloorTurretCharge</defName>
+    <label>deployable charge turret</label>
+    <description>A automatic submersible spacer-grade popup defense mounted with charge rifles which acts as a normal floor tile when unpowered. It only takes half as much damage when submerged. Requires plasteel to refurbish its barrels after heavy use. May explode when damaged.</description>
+    <thingClass>VFESecurity.SubmersibleBuilding_TurretGun</thingClass>
+    <graphicData Inherit="False">
+      <texPath>Things/Building/Floor/TurretFloor_Base</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(1,1)</drawSize>
+      <damageData>
+        <rect>(0.2,0.2,0.6,0.6)</rect>
+      </damageData>
+      <shadowData>
+        <volume>(0.27,0.25,0.27)</volume>
+        <offset>(0,0,0)</offset>
+      </shadowData>
+    </graphicData>
+    <uiIconPath>UI/TurretFloor_TopChargeUI</uiIconPath>
+    <uiIconScale>0.90</uiIconScale>
+    <costStuffCount>0</costStuffCount>
+    <stuffCategories Inherit="False" />
+    <costList Inherit="False">
+      <Plasteel>85</Plasteel>
+      <ComponentSpacer>1</ComponentSpacer>
+      <ComponentIndustrial>4</ComponentIndustrial>
+    </costList>
+    <statBases>
+      <MaxHitPoints>600</MaxHitPoints>
+      <WorkToBuild>9000</WorkToBuild>
+      <ShootingAccuracyTurret>0.965</ShootingAccuracyTurret>
+      <Mass>12</Mass>
+      <Flammability>0.5</Flammability>
+    </statBases>
+    <comps Inherit="False">
+      <li Class="OgAutoPowerSwitch.CompProperties_OgAutoPowerSwitch"/>
+      <li Class="CompProperties_Explosive">
+        <explosiveRadius>3.9</explosiveRadius>
+        <explosiveDamageType>Bomb</explosiveDamageType>
+        <chanceNeverExplodeFromDamage>0.5</chanceNeverExplodeFromDamage>
+      </li>
+      <li Class="CompProperties_Forbiddable"/>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>120</basePowerConsumption>
+      </li>
+      <li Class="CompProperties_Flickable"/>
+      <li Class="CompProperties_Breakdownable"/>
+      <li Class="CompProperties_Refuelable">
+        <fuelLabel>Shots until barrel change</fuelLabel>
+        <fuelGizmoLabel>Barrel durability</fuelGizmoLabel>
+        <fuelFilter>
+          <thingDefs>
+            <li>Plasteel</li>
+          </thingDefs>
+        </fuelFilter>
+        <fuelCapacity>220</fuelCapacity>
+        <initialFuelPercent>1</initialFuelPercent>
+        <autoRefuelPercent>0.75</autoRefuelPercent>
+        <showFuelGizmo>true</showFuelGizmo>
+        <minimumFueledThreshold>1</minimumFueledThreshold>
+        <fuelMultiplier>6</fuelMultiplier>
+        <factorByDifficulty>true</factorByDifficulty>
+        <consumeFuelOnlyWhenUsed>true</consumeFuelOnlyWhenUsed>
+        <outOfFuelMessage>Needs new barrel</outOfFuelMessage>
+        <fuelIconPath>UI/Overlays/Barrel</fuelIconPath>
+      </li>
+      <li Class="VFESecurity.CompProperties_Submersible">
+        <submergedPassability>Standable</submergedPassability>
+        <submergedGraphicData>
+          <texPath>Things/Building/Floor/TurretFloorSubmerged_south</texPath>
+          <graphicClass>Graphic_Single</graphicClass>
+          <drawSize>(1,1)</drawSize>
+          <damageData>
+            <cornerTL>Damage/Corner</cornerTL>
+            <cornerTR>Damage/Corner</cornerTR>
+            <cornerBL>Damage/Corner</cornerBL>
+            <cornerBR>Damage/Corner</cornerBR>
+          </damageData>
+        </submergedGraphicData>
+        <submergedDamageFactor>0.5</submergedDamageFactor>
+        <ticksToSubmerge>120</ticksToSubmerge>
+      </li>
+      <li Class="VFESecurity.CompProperties_TerrainSetter">
+        <terrainDef>Concrete</terrainDef>
+      </li>
+    </comps>
+    <passability>PassThroughOnly</passability>
+    <terrainAffordanceNeeded>Heavy</terrainAffordanceNeeded>
+    <building>
+      <turretGunDef>VFES_Gun_ChargeTurretPopup</turretGunDef>
+    </building>
+    <placeWorkers>
+      <li>PlaceWorker_TurretTop</li>
+      <li>PlaceWorker_ShowTurretRadius</li>
+    </placeWorkers>
+    <constructionSkillPrerequisite>6</constructionSkillPrerequisite>
+    <researchPrerequisites Inherit="False">
+      <li>VFES_ConcealedDefenses</li>
+      <li>VFES_PulseChargedDefenses</li>
+    </researchPrerequisites>
+  </ThingDef>
+
+  <ThingDef ParentName="BaseWeaponTurret">
+    <defName>VFES_Gun_ChargeTurretPopup</defName>
+    <label>charged turret gun</label>
+    <description>A charge rifle made to be mounted on a turret.</description>
+    <graphicData>
+      <texPath>TurretFloor_TopCharge</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <soundInteract>Interact_Rifle</soundInteract>
+    <destroyOnDrop>true</destroyOnDrop>
+    <tradeability>None</tradeability>
+    <useHitPoints>false</useHitPoints>
+    <statBases>
+      <AccuracyTouch>0.55</AccuracyTouch>
+      <AccuracyShort>0.64</AccuracyShort>
+      <AccuracyMedium>0.55</AccuracyMedium>
+      <AccuracyLong>0.45</AccuracyLong>
+      <RangedWeapon_Cooldown>5.6</RangedWeapon_Cooldown>
+      <DeteriorationRate>0</DeteriorationRate>
+      <Mass>4.6</Mass>
+      <Flammability>0</Flammability>
+    </statBases>
+    <weaponTags Inherit="false">
+      <li>TurretGun</li>
+    </weaponTags>
+    <verbs>
+      <li>
+        <verbClass>Verb_Shoot</verbClass>
+        <hasStandardCommand>true</hasStandardCommand>
+        <defaultProjectile>Bullet_ChargeRifle</defaultProjectile>
+        <range>21.9</range>
+        <ticksBetweenBurstShots>24</ticksBetweenBurstShots>
+        <burstShotCount>2</burstShotCount>
+        <soundCast>Shot_ChargeRifle</soundCast>
+        <soundCastTail>GunTail_Medium</soundCastTail>
+        <muzzleFlashScale>9</muzzleFlashScale>
+        <consumeFuelPerShot>1</consumeFuelPerShot>
+      </li>
+    </verbs>
+  </ThingDef>
+</Defs>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+	<Operation Class="PatchOperationFindMod">
+		<mods>
+			<li>Vanilla Weapons Expanded</li>
+		</mods>
+		<match Class="PatchOperationSequence">
+			<operations>
+		        <li Class="PatchOperationReplace">
+			        <xpath>Defs/ThingDef[defName="VWE_MeleeWeapon_Shovel"]/recipeMaker/researchPrerequisite</xpath>
+			        <value>
+				        <researchPrerequisites>
+					        <li>Smithing</li>
+				        </researchPrerequisites>
+			        </value>
+                </li>
+		        <li Class="PatchOperationReplace">
+			        <xpath>Defs/ThingDef[defName="VWE_MeleeWeapon_CombatKnife"]/recipeMaker/researchPrerequisite</xpath>
+			        <value>
+				        <researchPrerequisites>
+					        <li>Machining</li>
+				        </researchPrerequisites>
+			        </value>
+                </li>
+		        <li Class="PatchOperationReplace">
+			        <xpath>Defs/ThingDef[defName="VWE_MeleeWeapon_Baton"]/recipeMaker/researchPrerequisite</xpath>
+			        <value>
+				        <researchPrerequisites>
+					        <li>Smithing</li>
+				        </researchPrerequisites>
+			        </value>
+                </li>
+			</operations>
+		</match>
+	</Operation>
+</Patch>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<loadFolders>
+  <v1.5>
+	<li>/</li>
+	<li>1.5</li>
+    <li IfModActive="vanillaexpanded.vwe">1.5/Mods/VWE</li>
+    <li IfModActive="sarg.alphaprefabs">1.5/Mods/AlphaPrefabs</li>
+    <li IfModActive="aoba.fortress.industrial">1.5/Mods/FortiIndust</li>
+  </v1.5>
+</loadFolders>

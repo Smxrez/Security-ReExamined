@@ -1,0 +1,30 @@
+<ModMetaData>
+	<packageId>Smxrez.securityreexamined</packageId>
+	<name>Security: Re-Examined</name>
+	<author>Smxrez</author>
+	<supportedVersions>
+		<li>1.5</li>
+	</supportedVersions>
+	<modDependencies>
+	<li>
+		<packageId>vanillaexpanded.vfesecurity</packageId>
+		<displayName>Vanilla Furniture Expanded - Security</displayName>
+		<steamWorkshopUrl>steam://url/CommunityFilePage/1845154007</steamWorkshopUrl>
+	</li>
+	<li>
+		<packageId>og.automaticpowerswitch</packageId>
+		<displayName>[Og] Automatic Power Switch</displayName>
+		<steamWorkshopUrl>steam://url/CommunityFilePage/3031634496</steamWorkshopUrl>
+	</li>
+	</modDependencies>
+	<description>Rebalance security</description>
+	<loadAfter>
+		<li>vanillaexpanded.vfesecurity</li>
+		<li>og.automaticpowerswitch</li>
+		<li>vanillaexpanded.vwe</li>
+		<li>sarg.alphaprefabs</li>
+	</loadAfter>
+	<incompatibleWith>
+		<li>ferny.persistentcavalryspikes</li>
+	</incompatibleWith>
+</ModMetaData>
