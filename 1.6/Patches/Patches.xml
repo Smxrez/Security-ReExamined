@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+	<Operation Class="PatchOperationFindMod">
+		<mods>
+			<li>Vanilla Furniture Expanded - Security</li>
+		</mods>
+		<match Class="PatchOperationSequence">
+			<operations>
+		        <li Class="PatchOperationReplace">
+		            <xpath>/Defs/ThingDef[defName = "VFES_Turret_Flame"]/statBases/MaxHitPoints</xpath>
+		            <value>
+                    	<MaxHitPoints>150</MaxHitPoints>
+		            </value>
+		        </li>
+		        <li Class="PatchOperationReplace">
+		            <xpath>/Defs/ThingDef[defName = "VFES_Turret_ChargeTurret"]/statBases/MaxHitPoints</xpath>
+		            <value>
+                    	<MaxHitPoints>250</MaxHitPoints>
+		            </value>
+		        </li>
+		        <li Class="PatchOperationReplace">
+		            <xpath>/Defs/VEF.Weapons.ExpandableProjectileDef[defName = "VFES_Bullet_FlameTurret"]/minDistanceToAffect</xpath>
+		            <value>
+                    	<minDistanceToAffect>3</minDistanceToAffect>
+		            </value>
+		        </li>
+		        <li Class="PatchOperationReplace">
+		            <xpath>/Defs/ThingDef[defName="VFES_Gun_Searchlight"]/modExtensions/li[@Class="VFESecurity.DazzleVerbProperties"]/illuminatedRadius</xpath>
+		            <value>
+                    	<illuminatedRadius>6.9</illuminatedRadius>
+		            </value>
+		        </li>
+		        <li Class="PatchOperationReplace">
+		            <xpath>/Defs/HediffDef[defName="VFES_Dazzled"]/stages/li/partEfficiencyOffset</xpath>
+		            <value>
+                    	<partEfficiencyOffset>-0.40</partEfficiencyOffset>
+		            </value>
+		        </li>
+		        <li Class="PatchOperationReplace">
+		            <xpath>/Defs/ThingDef[defName = "VFES_Turret_Artillery"]/costList/ReinforcedBarrel</xpath>
+		            <value>
+      					<ReinforcedBarrel>2</ReinforcedBarrel>
+		            </value>
+		        </li>
+		        <li Class="PatchOperationReplace">
+		            <xpath>/Defs/ThingDef[defName = "VFES_Turret_Artillery"]/comps/li[@Class="CompProperties_Refuelable"]/fuelMultiplier</xpath>
+		            <value>
+      					<fuelMultiplier>10</fuelMultiplier>
+		            </value>
+		        </li>
+		        <li Class="PatchOperationReplace">
+		            <xpath>/Defs/ThingDef[defName = "VFES_Bullet_ChargeRailgunShot"]/projectile/speed</xpath>
+		            <value>
+						<speed>200</speed>
+		            </value>
+		        </li>
+		        <li Class="PatchOperationReplace">
+		            <xpath>/Defs/ThingDef[defName = "VFES_Gun_RailgunTurret"]/statBases/AccuracyTouch</xpath>
+		            <value>
+						<AccuracyTouch>0.26</AccuracyTouch>
+		            </value>
+		        </li>
+		        <li Class="PatchOperationReplace">
+		            <xpath>/Defs/ThingDef[defName = "VFES_Gun_RailgunTurret"]/statBases/AccuracyShort</xpath>
+		            <value>
+						<AccuracyShort>0.42</AccuracyShort>
+		            </value>
+		        </li>
+		        <li Class="PatchOperationReplace">
+		            <xpath>/Defs/ThingDef[defName = "VFES_Gun_RailgunTurret"]/statBases/AccuracyMedium</xpath>
+		            <value>
+						<AccuracyMedium>0.72</AccuracyMedium>
+		            </value>
+		        </li>
+		        <li Class="PatchOperationRemove">
+		            <xpath>/Defs/ThingDef[defName = "VFES_Dugout"]/researchPrerequisites</xpath>
+		        </li>
+		        <li Class="PatchOperationReplace">
+		            <xpath>/Defs/ThingDef[defName = "VFES_Gun_ArmoredTurret"]/statBases/RangedWeapon_Cooldown</xpath>
+		            <value>
+						<RangedWeapon_Cooldown>5.2</RangedWeapon_Cooldown>
+		            </value>
+		        </li>
+		        <li Class="PatchOperationReplace">
+		            <xpath>/Defs/ThingDef[defName = "VFES_Gun_ShotgunTurret"]/verbs/li/range</xpath>
+		            <value>
+						<range>13.9</range>
+		            </value>
+		        </li>
+		        <li Class="PatchOperationReplace">
+		            <xpath>/Defs/ThingDef[defName = "VFES_Turret_ShotgunTurret"]/statBases/MaxHitPoints</xpath>
+		            <value>
+                    	<MaxHitPoints>150</MaxHitPoints>
+		            </value>
+		        </li>
+		        <li Class="PatchOperationReplace">
+		            <xpath>/Defs/ThingDef[defName = "VFES_Gun_FlameTurret"]/verbs/li/range</xpath>
+		            <value>
+						<range>13.9</range>
+		            </value>
+		        </li>
+		        <li Class="PatchOperationReplace">
+		            <xpath>/Defs/ThingDef[defName = "VFES_Gun_ConcealedTurret"]/verbs/li/range</xpath>
+		            <value>
+                    	<range>24.9</range>
+		            </value>
+		        </li>
+		        <li Class="PatchOperationReplace">
+		            <xpath>/Defs/ThingDef[defName = "VFES_Gun_ConcealedTurret"]/verbs/li/ticksBetweenBurstShots</xpath>
+		            <value>
+                    	<ticksBetweenBurstShots>12</ticksBetweenBurstShots>
+		            </value>
+		        </li>
+			</operations>
+		</match>
+	</Operation>
+</Patch>

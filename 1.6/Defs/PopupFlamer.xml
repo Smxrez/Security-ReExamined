@@ -1,95 +1,92 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Defs>
-  <ThingDef ParentName="VFES_Turret_MilitaryTurret">
+  <ThingDef ParentName="VFES_BuildingConcealedBase">
     <defName>VFES_Turret_FloorTurretPopup</defName>
-    <label>deployable flamer turret</label>
-    <description>A submersible military-grade flamethrower turret which acts as a normal floor tile when unpowered. It only takes half as much damage when submerged. Requires chemfuel to attack. May explode when damaged.</description>
-    <thingClass>VFESecurity.SubmersibleBuilding_TurretGun</thingClass>
+    <label>concealed flamer turret</label>
+    <description>A compact automatic flamethrower turret equipped with retractable armor plating and a submersion mechanism. It only takes half as much damage when submerged. Requires chemfuel to attack. May explode when damaged.</description>
+    <thingClass>VFESecurity.Building_ConcealedTurret</thingClass>
+    <drawerType>MapMeshAndRealTime</drawerType>
+    <drawHighlight>true</drawHighlight>
+    <drawHighlightOnlyForHostile>true</drawHighlightOnlyForHostile>
     <graphicData Inherit="False">
-      <texPath>Things/Building/Floor/TurretFloor_Base</texPath>
+      <texPath>NewThings/Security/ConcealedTurret/ConcealedTurret_Base</texPath>
       <graphicClass>Graphic_Single</graphicClass>
       <drawSize>(1,1)</drawSize>
       <damageData>
         <rect>(0.2,0.2,0.6,0.6)</rect>
       </damageData>
-      <shadowData>
-        <volume>(0.27,0.25,0.27)</volume>
-        <offset>(0,0,0)</offset>
-      </shadowData>
     </graphicData>
-    <uiIconPath>UI/TurretFloor_TopFlamerUI</uiIconPath>
+    <techLevel>Industrial</techLevel>
+    <uiIconPath>UI/New/TurretFloor_TopFlamerUI</uiIconPath>
     <uiIconScale>0.90</uiIconScale>
+    <minifiedDef>MinifiedThing</minifiedDef>
+    <altitudeLayer>Building</altitudeLayer>
+    <stealable>false</stealable>
+    <rotatable>false</rotatable>
+    <thingCategories>
+      <li>BuildingsSecurity</li>
+    </thingCategories>
     <costStuffCount>0</costStuffCount>
     <stuffCategories Inherit="False" />
-    <costList Inherit="False">
-      <Steel>280</Steel>
-      <Chemfuel>40</Chemfuel>
-      <ComponentIndustrial>8</ComponentIndustrial>
+    <costList>
+      <Steel>120</Steel>
+      <ComponentIndustrial>6</ComponentIndustrial>
     </costList>
     <statBases>
-      <MaxHitPoints>300</MaxHitPoints>
-      <WorkToBuild>6600</WorkToBuild>
+      <MaxHitPoints>165</MaxHitPoints>
+      <WorkToBuild>3200</WorkToBuild>
       <Mass>18</Mass>
       <Flammability>0</Flammability>
     </statBases>
     <comps Inherit="False">
-      <li Class="OgAutoPowerSwitch.CompProperties_OgAutoPowerSwitch"/>
+      <li Class="VFESecurity.CompProperties_Concealed">
+        <submergeSeconds>1</submergeSeconds>
+        <deploySeconds>1</deploySeconds>
+        <cooldownSeconds>10</cooldownSeconds>
+        <submergedGraphic>
+          <texPath>NewThings/Security/ConcealedTurret/ConcealedTurret_Concealed</texPath>
+          <graphicClass>Graphic_Single</graphicClass>
+        </submergedGraphic>
+      </li>
       <li Class="CompProperties_Explosive">
-        <explosiveRadius>3.9</explosiveRadius>
-        <explosiveDamageType>Bomb</explosiveDamageType>
-        <chanceNeverExplodeFromDamage>0.5</chanceNeverExplodeFromDamage>
+        <!-- 1.9 explosive radius when empty; 5.9 when full -->
+        <explosiveRadius>1.9</explosiveRadius>
+        <explosiveExpandPerFuel>0.2</explosiveExpandPerFuel> <!-- Factoring in square rooting -->
+        <explosiveDamageType>Flame</explosiveDamageType>
       </li>
       <li Class="CompProperties_Forbiddable" />
       <li Class="CompProperties_Power">
         <compClass>CompPowerTrader</compClass>
-        <basePowerConsumption>120</basePowerConsumption>
+        <basePowerConsumption>90</basePowerConsumption>
       </li>
       <li Class="CompProperties_Flickable" />
       <li Class="CompProperties_Breakdownable" />
       <li Class="CompProperties_Refuelable">
-        <fuelLabel>Shots until barrel change</fuelLabel>
-        <fuelGizmoLabel>Barrel durability</fuelGizmoLabel>
-        <fuelFilter>
-          <thingDefs>
-            <li>Chemfuel</li>
-          </thingDefs>
-        </fuelFilter>
-        <fuelCapacity>145</fuelCapacity>
-        <initialFuelPercent>1</initialFuelPercent>
+        <fuelLabel>Remaining fuel</fuelLabel>
+        <fuelGizmoLabel>Remaining fuel</fuelGizmoLabel>
+        <fuelFilter><thingDefs><li>Chemfuel</li></thingDefs></fuelFilter>
+        <fuelCapacity>20</fuelCapacity>
+        <initialFuelPercent>0</initialFuelPercent>
         <autoRefuelPercent>0.5</autoRefuelPercent>
         <showFuelGizmo>true</showFuelGizmo>
         <minimumFueledThreshold>1</minimumFueledThreshold>
-        <fuelMultiplier>1.0</fuelMultiplier>
+        <fuelMultiplier>0.25</fuelMultiplier> <!-- 4 chemfuel per burst, 80 per full reload -->
         <factorByDifficulty>true</factorByDifficulty>
         <consumeFuelOnlyWhenUsed>true</consumeFuelOnlyWhenUsed>
-        <outOfFuelMessage>Needs new barrels</outOfFuelMessage>
-        <fuelIconPath>UI/Overlays/Barrel</fuelIconPath>
+        <outOfFuelMessage>Needs chemfuel</outOfFuelMessage>
+        <fuelIconPath>Things/Item/Resource/Chemfuel</fuelIconPath>
       </li>
-      <li Class="VFESecurity.CompProperties_Submersible">
-        <submergedPassability>Standable</submergedPassability>
-        <submergedGraphicData>
-          <texPath>Things/Building/Floor/TurretFloorSubmerged_south</texPath>
-          <graphicClass>Graphic_Single</graphicClass>
-          <drawSize>(1,1)</drawSize>
-          <damageData>
-            <cornerTL>Damage/Corner</cornerTL>
-            <cornerTR>Damage/Corner</cornerTR>
-            <cornerBL>Damage/Corner</cornerBL>
-            <cornerBR>Damage/Corner</cornerBR>
-          </damageData>
-        </submergedGraphicData>
-        <submergedDamageFactor>0.5</submergedDamageFactor>
-        <ticksToSubmerge>120</ticksToSubmerge>
-      </li>
-      <li Class="VFESecurity.CompProperties_TerrainSetter">
-        <terrainDef>Concrete</terrainDef>
+      <li Class="CompProperties_Stunnable">
+        <affectedDamageDefs>
+          <li>Stun</li>
+          <li>EMP</li>
+        </affectedDamageDefs>
       </li>
     </comps>
     <passability>PassThroughOnly</passability>
     <terrainAffordanceNeeded>Heavy</terrainAffordanceNeeded>
     <building>
       <turretGunDef>VFES_Gun_FlameTurretPopup</turretGunDef>
-      <turretTopDrawSize>2.5</turretTopDrawSize>
     </building>
     <placeWorkers>
       <li>PlaceWorker_TurretTop</li>
@@ -106,7 +103,7 @@
     <label>flame turret gun</label>
     <description>A flamethrower made to be mounted on a turret.</description>
     <graphicData>
-      <texPath>Turrets/TurretFloor_TopFlamer</texPath>
+      <texPath>Turrets/New/TurretFloor_TopFlamer</texPath>
       <graphicClass>Graphic_Single</graphicClass>
     </graphicData>
     <soundInteract>Interact_Rifle</soundInteract>
@@ -114,7 +111,7 @@
     <tradeability>None</tradeability>
     <useHitPoints>false</useHitPoints>
     <statBases>
-      <RangedWeapon_Cooldown>6.9</RangedWeapon_Cooldown>
+      <RangedWeapon_Cooldown>6</RangedWeapon_Cooldown>
       <DeteriorationRate>0</DeteriorationRate>
       <Mass>5</Mass>
       <Flammability>0</Flammability>
@@ -128,14 +125,15 @@
         <hasStandardCommand>true</hasStandardCommand>
         <defaultProjectile>VFES_Bullet_FlameTurret</defaultProjectile>
         <ai_AvoidFriendlyFireRadius>3</ai_AvoidFriendlyFireRadius>
-        <warmupTime>1.25</warmupTime>
-        <range>10.9</range>
+        <warmupTime>0</warmupTime>
+        <range>11.9</range>
         <burstShotCount>1</burstShotCount>
-        <soundCast>VFES_Shot_Flamethrower</soundCast>
+        <soundCast>InfernoCannon_Fire</soundCast>
         <soundCastTail>GunTail_Light</soundCastTail>
         <muzzleFlashScale>14</muzzleFlashScale>
-        <consumeFuelPerShot>10</consumeFuelPerShot>
+        <consumeFuelPerShot>1</consumeFuelPerShot>
       </li>
     </verbs>
   </ThingDef>
+
 </Defs>

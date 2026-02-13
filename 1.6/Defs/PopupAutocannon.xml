@@ -1,25 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Defs>
-  <ThingDef ParentName="AutocannonTurret">
+  <ThingDef ParentName="VFES_BuildingConcealedBase">
     <defName>VFES_Turret_FloorTurretAutoCannon</defName>
-    <label>deployable autocannon turret</label>
-    <description>A submersible military-grade autocannon which acts as a normal floor tile when unpowered. It only takes half as much damage when submerged. Requires steel to refurbish its barrels after heavy use. May explode when damaged.</description>
-    <thingClass>VFESecurity.SubmersibleBuilding_TurretGun</thingClass>
+    <label>concealed autocannon turret</label>
+    <description>A compact automatic autocannon turret equipped with retractable armor plating and a submersion mechanism. It only takes half as much damage when submerged. Requires steel to refurbish its barrels after heavy use. May explode when damaged.</description>
+    <thingClass>VFESecurity.Building_ConcealedTurret</thingClass>
+    <drawerType>MapMeshAndRealTime</drawerType>
+    <drawHighlight>true</drawHighlight>
+    <drawHighlightOnlyForHostile>true</drawHighlightOnlyForHostile>
     <graphicData Inherit="False">
-      <texPath>Things/Building/Floor/TurretFloor_Base</texPath>
+      <texPath>NewThings/Security/ConcealedTurret/ConcealedTurret_Base</texPath>
       <graphicClass>Graphic_Single</graphicClass>
-      <drawSize>(1.5,1.5)</drawSize>
+      <drawSize>(2,2)</drawSize>
       <damageData>
         <rect>(0.2,0.2,0.6,0.6)</rect>
       </damageData>
-      <shadowData>
-        <volume>(0.27,0.25,0.27)</volume>
-        <offset>(0,0,0)</offset>
-      </shadowData>
     </graphicData>
     <size>(2,2)</size>
-    <uiIconPath>UI/TurretFloor_TopAutocannonUI</uiIconPath>
+    <techLevel>Industrial</techLevel>
+    <uiIconPath>UI/New/TurretFloor_TopAutocannonUI</uiIconPath>
     <uiIconScale>0.90</uiIconScale>
+    <minifiedDef>MinifiedThing</minifiedDef>
+    <altitudeLayer>Building</altitudeLayer>
+    <stealable>false</stealable>
+    <rotatable>false</rotatable>
+    <thingCategories>
+      <li>BuildingsSecurity</li>
+    </thingCategories>
     <costStuffCount>0</costStuffCount>
     <stuffCategories Inherit="False" />
     <costList Inherit="False">
@@ -28,14 +35,23 @@
       <ComponentIndustrial>10</ComponentIndustrial>
     </costList>
     <statBases>
-      <MaxHitPoints>760</MaxHitPoints>
-      <WorkToBuild>25000</WorkToBuild>
+      <MaxHitPoints>420</MaxHitPoints>
+      <WorkToBuild>21000</WorkToBuild>
       <ShootingAccuracyTurret>0.96</ShootingAccuracyTurret>
-      <Mass>100</Mass>
+      <Mass>120</Mass>
       <Flammability>0.7</Flammability>
     </statBases>
     <comps>
-	  <li Class="OgAutoPowerSwitch.CompProperties_OgAutoPowerSwitch"/>
+      <li Class="VFESecurity.CompProperties_Concealed">
+        <submergeSeconds>3</submergeSeconds>
+        <deploySeconds>3</deploySeconds>
+        <cooldownSeconds>10</cooldownSeconds>
+        <submergedGraphic>
+          <texPath>NewThings/Security/ConcealedTurret/ConcealedTurret_Concealed</texPath>
+          <drawSize>(2,2)</drawSize>
+          <graphicClass>Graphic_Single</graphicClass>
+        </submergedGraphic>
+      </li>
       <li Class="CompProperties_Explosive">
         <wickTicks>240</wickTicks>
         <explosiveRadius>5.9</explosiveRadius>
@@ -64,31 +80,12 @@
         <consumeFuelOnlyWhenUsed>true</consumeFuelOnlyWhenUsed>
         <fuelIconPath>UI/Overlays/Barrel</fuelIconPath>
       </li>
-      <li Class="VFESecurity.CompProperties_Submersible">
-        <submergedPassability>Standable</submergedPassability>
-        <submergedGraphicData>
-          <texPath>Things/Building/Floor/TurretFloorSubmerged_south</texPath>
-          <graphicClass>Graphic_Single</graphicClass>
-          <drawSize>(1.5,1.5)</drawSize>
-          <damageData>
-            <cornerTL>Damage/Corner</cornerTL>
-            <cornerTR>Damage/Corner</cornerTR>
-            <cornerBL>Damage/Corner</cornerBL>
-            <cornerBR>Damage/Corner</cornerBR>
-          </damageData>
-        </submergedGraphicData>
-        <submergedDamageFactor>0.5</submergedDamageFactor>
-        <ticksToSubmerge>160</ticksToSubmerge>
-      </li>
-      <li Class="VFESecurity.CompProperties_TerrainSetter">
-        <terrainDef>Concrete</terrainDef>
-      </li>
     </comps>
     <passability>PassThroughOnly</passability>
     <terrainAffordanceNeeded>Heavy</terrainAffordanceNeeded>
     <building>
       <turretGunDef>Gun_AutocannonTurretPopup</turretGunDef>
-      <turretTopDrawSize>3.1</turretTopDrawSize>
+      <turretTopDrawSize>4</turretTopDrawSize>
       <turretBurstCooldownTime>3.5</turretBurstCooldownTime>
     </building>
     <placeWorkers>
@@ -107,7 +104,7 @@
     <label>autocannon</label>
     <description>A self-loading large-bore cannon designed to attach to a turret.</description>
     <graphicData>
-      <texPath>Turrets/TurretFloor_TopAutocannon</texPath>
+      <texPath>Turrets/New/TurretFloor_TopAutocannon</texPath>
       <graphicClass>Graphic_Single</graphicClass>
     </graphicData>
     <statBases>
@@ -126,7 +123,7 @@
         <defaultProjectile>Bullet_AutocannonTurret</defaultProjectile>
         <warmupTime>0</warmupTime>
         <minRange>8.9</minRange>
-        <range>28.9</range>
+        <range>27.9</range>
         <ticksBetweenBurstShots>25</ticksBetweenBurstShots>
         <burstShotCount>3</burstShotCount>
         <soundCast>Shot_Autocannon</soundCast>

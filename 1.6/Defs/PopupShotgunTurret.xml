@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <ThingDef ParentName="VFES_BuildingConcealedBase">
+    <defName>VFES_Turret_FloorTurretShotgun</defName>
+    <label>concealed shotgun turret</label>
+    <description>A compact automatic shotgun turret equipped with retractable armor plating and a submersion mechanism. Requires steel to refurbish its barrel after heavy use. May explode when damaged. Its dumb AI brain can't be directly controlled, so beware of friendly fire.</description>
+    <thingClass>VFESecurity.Building_ConcealedTurret</thingClass>
+    <drawerType>MapMeshAndRealTime</drawerType>
+    <drawHighlight>true</drawHighlight>
+    <drawHighlightOnlyForHostile>true</drawHighlightOnlyForHostile>
+    <graphicData Inherit="False">
+      <texPath>NewThings/Security/ConcealedTurret/ConcealedTurret_Base</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(1,1)</drawSize>
+      <damageData>
+        <rect>(0.2,0.2,0.6,0.6)</rect>
+      </damageData>
+    </graphicData>
+    <techLevel>Industrial</techLevel>
+    <uiIconPath>UI/New/TurretFloor_TopShotgunUI</uiIconPath>
+    <uiIconScale>0.9</uiIconScale>
+    <minifiedDef>MinifiedThing</minifiedDef>
+    <altitudeLayer>Building</altitudeLayer>
+    <stealable>false</stealable>
+    <rotatable>false</rotatable>
+    <thingCategories>
+      <li>BuildingsSecurity</li>
+    </thingCategories>
+    <costStuffCount>0</costStuffCount>
+    <stuffCategories Inherit="False" />
+    <statBases>
+      <MaxHitPoints>165</MaxHitPoints>
+      <Flammability>0.6</Flammability>
+      <WorkToBuild>2400</WorkToBuild>
+      <Mass>12</Mass>
+      <Beauty>-20</Beauty>
+      <ShootingAccuracyTurret>0.96</ShootingAccuracyTurret> <!-- like level 8 human shooter -->
+    </statBases>
+    <tickerType>Normal</tickerType>
+    <comps Inherit="False">
+      <li Class="VFESecurity.CompProperties_Concealed">
+        <submergeSeconds>2</submergeSeconds>
+        <deploySeconds>1</deploySeconds>
+        <cooldownSeconds>10</cooldownSeconds>
+        <submergedGraphic>
+          <texPath>NewThings/Security/ConcealedTurret/ConcealedTurret_Concealed</texPath>
+          <graphicClass>Graphic_Single</graphicClass>
+        </submergedGraphic>
+      </li>
+      <li Class="CompProperties_Explosive">
+        <wickTicks>240</wickTicks>
+        <explosiveRadius>3.9</explosiveRadius>
+        <explosiveDamageType>Bomb</explosiveDamageType>
+        <chanceNeverExplodeFromDamage>0.5</chanceNeverExplodeFromDamage>
+      </li>
+      <li Class="CompProperties_Forbiddable" />
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>100</basePowerConsumption>
+      </li>
+      <li Class="CompProperties_Flickable" />
+      <li Class="CompProperties_Breakdownable" />
+      <li Class="CompProperties_Refuelable">
+        <fuelLabel>Shots until barrel change</fuelLabel>
+        <fuelGizmoLabel>Barrel durability</fuelGizmoLabel>
+        <outOfFuelMessage>Needs new barrel</outOfFuelMessage>
+        <fuelFilter><thingDefs><li>Steel</li></thingDefs></fuelFilter>
+        <fuelCapacity>40</fuelCapacity>
+        <initialFuelPercent>1</initialFuelPercent>
+        <autoRefuelPercent>0.5</autoRefuelPercent> <!-- 2 steel per burst, 80 per full reload -->
+        <showFuelGizmo>true</showFuelGizmo>
+        <minimumFueledThreshold>2</minimumFueledThreshold>
+        <factorByDifficulty>true</factorByDifficulty>
+        <consumeFuelOnlyWhenUsed>true</consumeFuelOnlyWhenUsed>
+        <fuelIconPath>UI/Overlays/Barrel</fuelIconPath>
+      </li>
+      <li Class="CompProperties_Stunnable">
+        <affectedDamageDefs>
+          <li>Stun</li>
+          <li>EMP</li>
+        </affectedDamageDefs>
+      </li>
+    </comps>
+    <passability>PassThroughOnly</passability>
+    <pathCost>50</pathCost>
+    <fillPercent>0.55</fillPercent>
+    <hasTooltip>true</hasTooltip>
+    <costList>
+      <Steel>120</Steel>
+      <ComponentIndustrial>5</ComponentIndustrial>
+    </costList>
+    <terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
+    <designationCategory>Security</designationCategory>
+    <constructionSkillPrerequisite>5</constructionSkillPrerequisite>
+    <building>
+      <ai_combatDangerous>true</ai_combatDangerous>
+      <turretGunDef>VFES_Gun_ShotgunTurretPopup</turretGunDef>
+      <turretBurstCooldownTime>4.5</turretBurstCooldownTime>
+    </building>
+    <placeWorkers>
+      <li>PlaceWorker_TurretTop</li>
+      <li>PlaceWorker_ShowTurretRadius</li>
+    </placeWorkers>
+    <researchPrerequisites>
+      <li>GunTurrets</li>
+      <li>GasOperation</li>
+      <li>VFES_ConcealedDefenses</li>
+    </researchPrerequisites>
+  </ThingDef>
+
+  <ThingDef ParentName="BaseWeaponTurret">
+    <defName>VFES_Gun_ShotgunTurretPopup</defName>
+    <label>shotgun turret gun</label>
+    <description>An automatic shotgun made to be mounted on a turret.</description>
+    <graphicData>
+      <texPath>Turrets/New/TurretFloor_TopShotgun</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <soundInteract>Interact_Rifle</soundInteract>
+    <statBases>
+      <AccuracyTouch>0.8</AccuracyTouch>
+      <AccuracyShort>0.87</AccuracyShort>
+      <AccuracyMedium>0.77</AccuracyMedium>
+      <AccuracyLong>0.64</AccuracyLong>
+      <RangedWeapon_Cooldown>4.5</RangedWeapon_Cooldown>
+      <DeteriorationRate>0</DeteriorationRate>
+      <Mass>5</Mass>
+      <Flammability>0</Flammability>
+    </statBases>
+    <verbs>
+      <li>
+        <verbClass>Verb_Shoot</verbClass>
+        <hasStandardCommand>true</hasStandardCommand>
+        <defaultProjectile>Bullet_Shotgun</defaultProjectile>
+        <warmupTime>0</warmupTime>
+        <range>11.9</range>
+        <burstShotCount>1</burstShotCount>
+        <soundCast>GunShotA</soundCast>
+        <soundCastTail>GunTail_Light</soundCastTail>
+        <muzzleFlashScale>9</muzzleFlashScale>
+        <consumeFuelPerShot>1</consumeFuelPerShot>
+      </li>
+    </verbs>
+  </ThingDef>
+</Defs>
